@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/HBL.apk",
@@ -18,10 +19,6 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
-    },
-    {
-      "outputDirectory": "dist",
       "destination": "/index.html"
     }
   ]
