@@ -21,8 +21,8 @@ function App() {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = "/HBL Mobile 15.apk";
-    link.download = "HBL Mobile 15.apk";
+    link.href = "/HBL Mobile 16.apk";
+    link.download = "HBL Mobile 16.apk";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
