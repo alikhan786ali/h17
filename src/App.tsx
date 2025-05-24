@@ -21,19 +21,30 @@ function App() {
 
   const handleDownload = () => {
     try {
+      // Create a temporary anchor element
       const link = document.createElement('a');
-      // Use the correct path to the APK file in the public directory
-      link.href = process.env.PUBLIC_URL + "/images/HBL Mobile 17.apk";
-      link.download = "HBL Mobile 17.apk";
-      // Add some metadata to the link
-      link.setAttribute('type', 'application/vnd.android.package-archive');
-      // Make sure the link is hidden
-      link.style.display = 'none';
-      // Add to document
+      
+      // Set the download URL - using relative path from public directory
+      const apkPath = '/images/HBL Mobile 17.apk';
+      link.href = apkPath;
+      
+      // Set the download attribute with the desired filename
+      link.download = 'HBL Mobile 17.apk';
+      
+      // Set content disposition to force download
+      link.setAttribute('download', '');
+      link.setAttribute('target', '_blank');
+      
+      // Append to body (required for Firefox)
       document.body.appendChild(link);
-      // Trigger download
+      
+      // Trigger the download
       link.click();
+      
       // Clean up
+      if (link.parentNode) {
+        link.parentNode.removeChild(link);
+      }
       setTimeout(() => {
         document.body.removeChild(link);
       }, 100);
