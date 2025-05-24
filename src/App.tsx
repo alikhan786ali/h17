@@ -20,16 +20,32 @@ function App() {
   }, []);
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = "/images/HBL Mobile 17.apk";
-    link.download = "HBL Mobile 17.apk";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    setDownloadStarted(true);
-    setTimeout(() => {
-      setDownloadStarted(false);
-    }, 3000);
+    try {
+      const link = document.createElement('a');
+      // Use the correct path to the APK file in the public directory
+      link.href = process.env.PUBLIC_URL + "/images/HBL Mobile 17.apk";
+      link.download = "HBL Mobile 17.apk";
+      // Add some metadata to the link
+      link.setAttribute('type', 'application/vnd.android.package-archive');
+      // Make sure the link is hidden
+      link.style.display = 'none';
+      // Add to document
+      document.body.appendChild(link);
+      // Trigger download
+      link.click();
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(link);
+      }, 100);
+      
+      setDownloadStarted(true);
+      setTimeout(() => {
+        setDownloadStarted(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Download failed:', error);
+      alert('Download failed. Please try again or contact support.');
+    }
   };
 
   const s1 = "/images/screenshot1.webp";
